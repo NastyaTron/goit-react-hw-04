@@ -14,15 +14,18 @@ export default function SearchBar({ onSearch }) {
   return (
     <header className={css.header}>
       <Formik initialValues={{ text: "" }} onSubmit={handleSubmit}>
-        <Form>
+        <Form className={css.form}>
           <Field
+            className={css.input}
             type="text"
             name="text"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
           />
-          <button type="submit">Search</button>
+          <button className={css.button} type="submit">
+            Search
+          </button>
           <Toaster />
         </Form>
       </Formik>

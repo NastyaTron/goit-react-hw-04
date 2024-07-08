@@ -17,7 +17,6 @@ export default function App() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalImage, setModalImage] = useState({});
 
-  console.log(modalImage);
   const handleSearch = async (newTopic) => {
     setArticles([]);
     setTopic(newTopic);

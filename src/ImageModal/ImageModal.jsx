@@ -21,8 +21,10 @@ export default function ImageModal({ modalIsOpen, closeModal, src, alt }) {
           background: "none",
           border: "none",
           padding: "0",
-          maxWidth: "90vw",
-          maxHeight: "90vh",
+          height: "auto",
+          width: "500px",
+          height: "500px",
+          overflow: "hidden",
         },
       }}
     >

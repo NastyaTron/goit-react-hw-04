@@ -1,3 +1,5 @@
+import css from "./ImageCard.module.css";
+
 export default function ImageCard({
   item: {
     urls: { small, regular },
@@ -6,8 +8,9 @@ export default function ImageCard({
   openModal,
 }) {
   return (
-    <div>
+    <div className={css.section}>
       <img
+        className={css.img}
         src={small}
         alt={description}
         onClick={() => openModal({ regular, description })}

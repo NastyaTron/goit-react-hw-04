@@ -5,9 +5,9 @@ export default function Loader() {
     <Circles
       height="80"
       width="80"
-      color="#4fa94d"
+      color="#808080"
       ariaLabel="circles-loading"
-      wrapperStyle={{}}
+      wrapperStyle={{ justifyContent: "center", marginTop: "16px" }}
       wrapperClass=""
       visible={true}
     />
