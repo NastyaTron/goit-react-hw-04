@@ -8,23 +8,23 @@ import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "../ImageModal/ImageModal";
 
 export default function App() {
-  const [articles, setArticles] = useState([]);
+  const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [page, setPage] = useState(1);
-  const [topic, setTopic] = useState("");
+  const [query, setQuery] = useState("");
   const [totalPages, setTotalPages] = useState(1000);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalImage, setModalImage] = useState({});
 
-  const handleSearch = async (newTopic) => {
-    setArticles([]);
-    setTopic(newTopic);
+  const handleSearch = async (newQuery) => {
+    setImages([]);
+    setQuery(newQuery);
     setPage(1);
   };
 
   useEffect(() => {
-    if (topic === "") {
+    if (query === "") {
       return;
     }
 
@@ -32,9 +32,9 @@ export default function App() {
       try {
         setLoading(true);
         setError(false);
-        const data = await fetchArticles(topic, page);
+        const data = await fetchArticles(query, page);
         setTotalPages(data.total_pages);
-        setArticles((prevArticles) => {
+        setImages((prevArticles) => {
           return [...prevArticles, ...data];
         });
       } catch (error) {
@@ -44,7 +44,11 @@ export default function App() {
       }
     }
     getArticles();
-  }, [page, topic]);
+  }, [page, query]);
+
+  const handleLoadMore = () => {
+    setPage((prevState) => prevState + 1);
+  };
 
   const openModal = (image) => {
     setModalIsOpen(true);
@@ -58,13 +62,13 @@ export default function App() {
     <>
       {page >= totalPages && <p>This is End!</p>}
       <SearchBar onSearch={handleSearch} />
-      {articles.length > 0 && (
-        <ImageGallery items={articles} openModal={openModal} />
+      {images.length > 0 && (
+        <ImageGallery items={images} openModal={openModal} />
       )}
       {loading && <Loader />}
       {error && <ErrorMessage />}
-      {articles.length > 0 && !loading && (
-        <LoadMoreBtn page={page} setPage={setPage} />
+      {images.length > 0 && !loading && (
+        <LoadMoreBtn handleLoadMore={handleLoadMore} />
       )}
       <ImageModal
         modalIsOpen={modalIsOpen}
